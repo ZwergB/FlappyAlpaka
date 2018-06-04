@@ -1,0 +1,92 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;        
+}
+#pointScreen {
+    position: absolute;
+    background-color: white;
+    min-width: 33%;
+    min-height: 66%;
+
+    text-align: center;
+    left: 33%;
+    top: 16%;
+
+    border: 5px solid gray;
+}
+
+.pointsIn{
+    animation-name: pointsIn;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-out;
+} 
+
+@keyframes pointsIn{
+    0% {
+        top: -100%;
+    }
+
+    80% {
+        top: 20%;
+    }
+
+    95% {
+        top: 15%;
+    }
+
+    100% {
+        top: 16%;
+    }
+}
+
+.pointsOut{
+    animation-name: pointsOut;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;  
+
+    -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+    -moz-animation-fill-mode: forwards;    /* FF 5+ */
+    -o-animation-fill-mode: forwards;      /* Not implemented yet */
+    -ms-animation-fill-mode: forwards;     /* IE 10+ */
+    animation-fill-mode: forwards;         /* When the spec is finished */
+}
+
+canvas {
+    z-index: -3;
+}
+
+.scoreInit {
+    z-index: -5;
+}
+
+@keyframes pointsOut{
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -5;
+    }
+}    
+
+.bgLayer {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    background-image: url("https://jugendhackt.org/wp-content/themes/jugend-hackt/library/images/background.png");
+    filter: blur(2px);
+    
+    z-index: 0;
+}
+#flappyAlpaka {
+    position: relative;
+}
+#acutalPoints {
+    position: absolute;
+    z-index: 100;
+    margin: 5px;
+
+    font-size: 40px;
+}
