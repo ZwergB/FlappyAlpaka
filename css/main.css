@@ -137,6 +137,7 @@ canvas {
     max-width: 25%;
     margin-left: 33%;
 
+    border-radius: 2px;
     box-shadow: gray 2px 2px 2px;
 }
 
