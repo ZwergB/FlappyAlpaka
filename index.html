@@ -11,9 +11,11 @@
         <div id="pointScreen" class="scoreInit">
             <div class="bgLayer"></div>
             <div id="acutalPoints" class="noselect">
-                Hello
-
-                <button id="restart" onclick="scoreRestart();">Restart</button>
+                <div class="resultText">
+                    <h2>Result:</h2>
+                    <p><span id="points">0</span> Points</p>
+                </div>
+                <div id="restart" class="button" onclick="scoreRestart();">Restart</div>
             </div>
         </div>
         <img class="noselect" alt="sound" src="media/Speaker_Icon_off.svg" id="sound">

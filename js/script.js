@@ -159,6 +159,8 @@ function loose() {
 
     document.getElementById('restart').disabled = false;
     
+    document.getElementById('points').innerHTML = points;
+    
     gameState = 2;
     noLoop();
 }
