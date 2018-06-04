@@ -9,6 +9,9 @@ const PIPE_SPEED = 4;
 const POINT_POS  = {x: 10, y: 30};
 const NORMAL_GRAV = 0.5;
 
+const AUDIO_ON  = 'media/Speaker_Icon_on.svg'
+const AUDIO_OFF = 'media/Speaker_Icon_off.svg'
+
 let bird;
 let pipes = [];
 let points = 0;
@@ -21,6 +24,27 @@ let pointAnimation = [];
 let stars = [];
 
 let idleAnimation = 0;
+let birdSprite;
+
+let sound;
+
+function preload() {
+    birdSprite = loadImage('media/alpaka.png');
+    sound = new Audio('media/gamesound.mp3');
+    sound.volume = 0.2;
+}
+
+window.onload = function() {
+    document.getElementById('sound').addEventListener('click', function() {
+        if (sound.paused) {
+            document.getElementById('sound').setAttribute('src', AUDIO_ON);
+            sound.play();
+        } else {
+            document.getElementById('sound').setAttribute('src', AUDIO_OFF);
+            sound.pause();
+        }
+    })
+}
 
 function setup() {
     let can = createCanvas(940, 780);
@@ -206,10 +230,10 @@ class Stars {
 // Pipe
 class Pipe {
     constructor() {
-        this.space = 128;
+        this.space = 150;
         this.topSpace = randomIntFromInterval(64, height-this.space-64);
         this.x = width;
-        this.width = 32;
+        this.width = 40;
         this.speed = PIPE_SPEED;
         this.gotHit = false;
         this.noHit = false;
@@ -260,7 +284,7 @@ class Bird {
     constructor(y) {
         this.y = y;
         this.x = width/4;
-        this.size = 32;
+        this.size = 60;
     
         this.velocity = 0;
         this.force = 10;
@@ -276,7 +300,7 @@ class Bird {
     show() {
         fill(250);
         drawRainbowTail(this.history);
-        ellipse(this.x, this.y, this.size, this.size)
+        image(birdSprite, this.x-this.size/2, this.y-this.size/2, this.size, this.size);
 
         // push();
         // strokeWeight(3);
@@ -286,18 +310,15 @@ class Bird {
         // }
         // pop();
 
-        
-
-
         function drawRainbowTail(history) {
-            const topPoint = -12;
-            const bottomPoint = 15;
+            const topPoint = -20;
+            const bottomPoint = 25;
             const seperation = (abs(topPoint) + abs(bottomPoint)) / RAINBOW_PATTERN.length;
             let currentSep = 0;
 
             push();
            
-            strokeWeight(5);
+            strokeWeight(6);
             noFill();
 
             for (let i = 0; i < RAINBOW_PATTERN.length; i++) {
@@ -338,7 +359,7 @@ class Bird {
         }
 
         this.currentColor = (this.currentColor+1) % RAINBOW_PATTERN.length;
-        let historyEle = {x: this.x, y: this.y, color: RAINBOW_PATTERN[this.currentColor]};
+        let historyEle = {x: this.x-10, y: this.y, color: RAINBOW_PATTERN[this.currentColor]};
         this.history.push(historyEle)
 
         if (this.history.length > this.maxHistory) 
