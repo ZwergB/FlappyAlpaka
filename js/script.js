@@ -71,8 +71,15 @@ function setup() {
     textSize(20);
     frameRate(60);
     
-    window.addEventListener('mousedown', function() {jump();});
-    window.addEventListener('keydown', function(e) {
+
+    // Tests if the document gets oppend on a mobile and assigns the right event based on that
+    if ('ontouchstart' in document.documentElement) {
+        window.addEventListener('touchstart', function() {jump();});    
+    } else {
+        window.addEventListener('mousedown',  function() {jump();});
+    }
+
+    window.addEventListener('keydown',    function(e) {
         // when spacebar is pressed
         if (e.keyCode == 32 ) {
             jump();
@@ -141,6 +148,8 @@ function jump() {
     if (gameState == 1) {
         bird.up();
     }
+
+    console.log();
 }
 
 function startGame() {
