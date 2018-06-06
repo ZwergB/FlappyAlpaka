@@ -59,7 +59,7 @@ window.onload = function() {
 }
 
 function setup() {
-    let can = createCanvas(940, 780);
+    let can = createCanvas(1000, 800);
     can.parent('flappyAlpaka')
 
     restart();
@@ -70,7 +70,6 @@ function setup() {
 
     textSize(20);
     frameRate(60);
-    
 
     // Tests if the document gets oppend on a mobile and assigns the right event based on that
     if ('ontouchstart' in document.documentElement) {
@@ -122,6 +121,13 @@ function draw() {
         bird.y += noiseMove * 1.5;
         addStars();
         stars.map(star => star.update());
+
+        push();
+        textAlign(CENTER);
+        textSize(50);
+        strokeWeight(0);
+        text('PRESS SPACEBAR TO START', width/2, height*3/4);
+        pop();        
      
     } else if (gameState == 2) {
         bgMusic.volume = lerp(bgMusic.volume, 0.05, 0.2);
@@ -369,7 +375,13 @@ class Bird {
     addToRainbowTail() {
             
         this.currentColor = (this.currentColor+1) % RAINBOW_PATTERN.length;
-        let historyEle = {x: this.x-10, y: this.y, color: RAINBOW_PATTERN[this.currentColor]};
+
+        let xpos = this.y;
+
+        if (gameState == 0)
+            xpos -= this.y % 5;
+
+        let historyEle = {x: this.x-10, y: xpos, color: RAINBOW_PATTERN[this.currentColor]};
         this.history.push(historyEle)
 
         if (this.history.length > this.maxHistory) 
@@ -400,6 +412,9 @@ class Bird {
             this.velocity /= -10;
             this.y = +this.size/2;
         }
+
+        this.y = constrain(this.y, 0, height);
+
 
     }
 }
