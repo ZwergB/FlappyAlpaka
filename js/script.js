@@ -5,9 +5,9 @@ const RAINBOW_PATTERN = ['FF0000', // red
                          '0000FF', // blue
                          '4B0082', // indigo
                          '7F00FF'];
-const PIPE_SPEED = 4;
+const PIPE_SPEED = 3.5;
 const POINT_POS  = {x: 10, y: 30};
-const NORMAL_GRAV = 0.5;
+const NORMAL_GRAV = 0.6;
 
 let githubLink = 'https://raw.githubusercontent.com/ZwergB/FlappyAlpaka/master/';
 
@@ -91,7 +91,7 @@ function draw() {
     background(5);
 
     if (gameState == 1) {
-        if (cycleCount % 100 == 0) {
+        if (cycleCount % 150 == 0) {
             pipes.push(new Pipe());
         }
 
@@ -267,10 +267,10 @@ class Stars {
 // Pipe
 class Pipe {
     constructor() {
-        this.space = 150;
+        this.space = 160;
         this.topSpace = randomIntFromInterval(64, height-this.space-64);
         this.x = width;
-        this.width = 40;
+        this.width = 60;
         this.speed = PIPE_SPEED;
         this.gotHit = false;
         this.noHit = false;
