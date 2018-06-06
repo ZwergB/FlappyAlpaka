@@ -273,7 +273,7 @@ class Stars {
 // Pipe
 class Pipe {
     constructor() {
-        this.space = 160;
+        this.space = 170;
         this.topSpace = randomIntFromInterval(64, height-this.space-64);
         this.x = width;
         this.width = 60;
